@@ -5,10 +5,10 @@ Visit the Project on GitHub [https://github.com/Mylogo/ftp-sftp](https://github.
 Example FTP/SFTP Client using this library: [https://github.com/Mylogo/
 ftp-sftp-example](https://github.com/Mylogo/ftp-sftp-example)
 # Contents
-[Installation](#installation)
-[Overview](#overview)
-[API](#api)
-[Examples](#examples)
+* [Installation](#installation)
+* [Overview](#overview)
+* [API](#api)
+* [Examples](#examples)
 
 ## Installation
 
