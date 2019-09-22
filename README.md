@@ -1,5 +1,5 @@
 Treat local, FTP and SFTP files the same way.
-*100% Node.js*, no other software needed.
+**100% Node.js**, no other software needed.
 
 Visit the Project on GitHub [https://github.com/Mylogo/ftp-sftp](https://github.com/Mylogo/ftp-sftp)
 
