@@ -1,0 +1,25 @@
+{
+  "name": "ftp-sftp",
+  "version": "1.0.1",
+  "description": "Treat Local, FTP and SFTP file systems the same way.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "local",
+    "ftp",
+    "sftp",
+    "file-system",
+    "async"
+  ],
+  "author": "Dennis Heckmann",
+  "license": "ISC",
+  "dependencies": {
+    "ftp": "^0.3.10",
+    "ssh2-sftp-client": "^4.1.0"
+  }
+}
