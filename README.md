@@ -2,6 +2,7 @@ Treat local, FTP and SFTP files the same way.
 *100% Node.js*, no other software needed.
 
 Visit the Project on GitHub [https://github.com/Mylogo/ftp-sftp](https://github.com/Mylogo/ftp-sftp)
+
 Example FTP/SFTP Client using this library: [https://github.com/Mylogo/
 ftp-sftp-example](https://github.com/Mylogo/ftp-sftp-example)
 # Contents
