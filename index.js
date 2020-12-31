@@ -270,7 +270,7 @@ class SftpFileSystem extends FileSystem {
         .then(paths => {
           resolve(paths.map(it => new SftpFileInfo(it)))
         }).catch(err => {
-          reject(error)
+          reject(err)
         })
     })
   }
