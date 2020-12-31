@@ -1,6 +1,6 @@
 {
   "name": "ftp-sftp",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Treat Local, FTP and SFTP file systems the same way.",
   "main": "index.js",
   "directories": {
