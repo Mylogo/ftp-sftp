@@ -227,6 +227,12 @@ class FtpFileSystem extends FileSystem {
 			});
 		});
 	}
+	close() {
+		return new Promise((resolve, reject) => {
+			this.client.end();
+			resolve(true);
+		});
+	}
 	rename(oldPath, newPath) {
 		return new Promise((resolve, reject) => {
 			this.client.rename(oldPath, newPath, (err) => {
