@@ -116,6 +116,12 @@ class LocalFileSystem extends FileSystem {
 			});
 		});
 	}
+	close() {
+		return new Promise((resolve, reject) => {
+			this.client.end();
+			resolve(true);
+		});
+	}
 	rename(oldPath, newPath) {
 		return new Promise((resolve, reject) => {
 			fs.rename(oldPath, newPath, (err) => {
