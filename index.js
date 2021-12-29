@@ -1,6 +1,8 @@
+const fs = require('fs')
+const nodePath = require('path');
+
 const FtpClient = require('ftp')
 let SftpClient = require('ssh2-sftp-client');
-const fs = require('fs')
 
 class FileSystem {
 
@@ -22,7 +24,7 @@ class FileInfo {
 var deleteFolderRecursive = function(path) {
   if( fs.existsSync(path) ) {
     fs.readdirSync(path).forEach(function(file,index){
-      var curPath = path + "/" + file;
+      var curPath = nodePath.join(path, file);
       if(fs.lstatSync(curPath).isDirectory()) { // recurse
         deleteFolderRecursive(curPath);
       } else { // delete file
@@ -50,7 +52,7 @@ class LocalFileSystem extends FileSystem {
         }
         await Promise.all(
           files.map(fileName => new Promise((res, reject) => {
-            fs.stat(path + fileName, (err, stats) => {
+            fs.stat(nodePath.join(path, fileName), (err, stats) => {
               if (err) {
                 return reject(err)
               }
