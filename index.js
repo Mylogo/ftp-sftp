@@ -1,6 +1,8 @@
+const nodeFs = require('fs')
+const nodePath = require('path');
+
 const FtpClient = require('ftp')
-let SftpClient = require('ssh2-sftp-client');
-const fs = require('fs')
+const SftpClient = require('ssh2-sftp-client');
 
 class FileSystem {
 
@@ -20,16 +22,16 @@ class FileInfo {
 
 // credits going to https://geedew.com/remove-a-directory-that-is-not-empty-in-nodejs/
 var deleteFolderRecursive = function(path) {
-  if( fs.existsSync(path) ) {
-    fs.readdirSync(path).forEach(function(file,index){
-      var curPath = path + "/" + file;
-      if(fs.lstatSync(curPath).isDirectory()) { // recurse
+  if( nodeFs.existsSync(path) ) {
+    nodeFs.readdirSync(path).forEach(function(file,index){
+      var curPath = nodePath.join(path, file);
+      if(nodeFs.lstatSync(curPath).isDirectory()) { // recurse
         deleteFolderRecursive(curPath);
       } else { // delete file
-        fs.unlinkSync(curPath);
+        nodeFs.unlinkSync(curPath);
       }
     });
-    fs.rmdirSync(path);
+    nodeFs.rmdirSync(path);
   }
 };
 
@@ -44,13 +46,13 @@ class LocalFileSystem extends FileSystem {
   }
   async list(path) {
     return new Promise((resolve, reject) => {
-      fs.readdir(path, async (err, files) => {
+      nodeFs.readdir(path, async (err, files) => {
         if (err) {
           return reject(err)
         }
         await Promise.all(
           files.map(fileName => new Promise((res, reject) => {
-            fs.stat(path + fileName, (err, stats) => {
+            nodeFs.stat(nodePath.join(path, fileName), (err, stats) => {
               if (err) {
                 return reject(err)
               }
@@ -69,7 +71,7 @@ class LocalFileSystem extends FileSystem {
   put(src, toPath) {
     return new Promise((resolve, reject) => {
       try {
-        const writeStream = fs.createWriteStream(toPath)
+        const writeStream = nodeFs.createWriteStream(toPath)
         src.pipe(writeStream)
         resolve(true)
       } catch (e) {
@@ -80,7 +82,7 @@ class LocalFileSystem extends FileSystem {
   get(path) {
     return new Promise((resolve, reject) => {
       try {
-        const readStream = fs.createReadStream(path)
+        const readStream = nodeFs.createReadStream(path)
         resolve(readStream)
       } catch (e) {
         reject(e)
@@ -88,11 +90,11 @@ class LocalFileSystem extends FileSystem {
     })
   }
   mkdir(path, recursive) {
-    return fs.mkdir(path, { recursive })
+    return nodeFs.mkdir(path, { recursive })
   }
   rmdir(path, recursive) {
     if (!recursive)
-      return fs.rmdir(path)
+      return nodeFs.rmdir(path)
     return new Promise((resolve, reject) => {
       try {
         deleteFolderRecursive(path)
@@ -104,7 +106,7 @@ class LocalFileSystem extends FileSystem {
   }
   delete(path) {
     return new Promise((resolve, reject) => {
-      fs.unlink(path, err => {
+      nodeFs.unlink(path, err => {
         if (err) {
           return reject(err)
         }
@@ -114,7 +116,7 @@ class LocalFileSystem extends FileSystem {
   }
   rename(oldPath, newPath) {
     return new Promise((resolve, reject) => {
-      fs.rename(oldPath, newPath, err => {
+      nodeFs.rename(oldPath, newPath, err => {
         if (err) {
           return reject(err)
         }
